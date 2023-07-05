@@ -1,2 +1,2 @@
 #!/bin/bash
-ls -A | sort -k1.1d,1.1 -k1.2n | awk '{if($0=="."||$0=="..") {print "./"} else {print}}' | tr '\n' ',' | sed 's/,$/\n/'
+printf "%s\n" ./* | awk '{ if($0 == "./" || $0 == "../") { print $0 } else { print $0 (substr($0, length($0)) == "/" ? "" : "/") } }' | sort -k1.1d,1.1 -k1.2n | awk '{ printf "%s,", $0 } END { printf "\n" }' | sed 's/,$/\n/'
