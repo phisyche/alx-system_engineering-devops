@@ -1,2 +1,2 @@
 #!/bin/bash
-ls -Ap | sort -k1.1d,1.1 -k1.2n | tr '\n' ',' | sed 's/,$/\n/'
+ls -A | sort -k1.1d,1.1 -k1.2n | awk '{if($0=="."||$0=="..") {print "./"} else {print}}' | tr '\n' ',' | sed 's/,$/\n/'
